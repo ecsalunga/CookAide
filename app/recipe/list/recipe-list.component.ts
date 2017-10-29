@@ -14,16 +14,16 @@ export class RecipeListComponent implements OnInit {
 
   public onItemTap(args) {
     this.DL.Recipe = Object.assign({}, this.DL.Recipes[args.index]);
-    this.core.LoadComponent("recipe-detail");
-  }
-
-  public LoadComponent(selector: string) {
-    this.core.LoadComponent(selector);
+    this.LoadDetail();
   }
 
   public Add() {
     this.DL.Recipe = null;
-    this.LoadComponent("recipe-detail");
+    this.LoadDetail();
+  }
+
+  private LoadDetail() {
+    this.DL.LoadComponent("recipe-detail");
   }
 
   ngOnInit() { 

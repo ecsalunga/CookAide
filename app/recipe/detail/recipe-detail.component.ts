@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TextView } from "ui/text-view";
-import { isIOS } from "platform";
 import { Core } from "../../core";
 import { DataLayer, DataAccess, RecipeInfo } from "../../data";
-import * as imagepicker from "nativescript-imagepicker";
 
 @Component({
   moduleId: module.id,
@@ -38,40 +36,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   public SelectImage() {
-    let context = imagepicker.create({
-      mode: "single"
-    });
-
-    context.authorize()
-    .then(() => {
-        return context.present();
-    })
-    .then(images => {
-      images.forEach(image => {
-        let selected = image.fileUri;
-        let source = selected;
-        image.getImage().then(imagesource => {
-          if (isIOS) {
-            source =  selected.substr(7, selected.length)
-            let path = this.DL.GetPath(this.DL.Recipe.Name + '.png');
-            let saved = imagesource.saveToFile(path, "jpeg");
-            if(saved)
-              console.log("saved image "+path)
-            else
-              console.log("Did NOT save image on iOS: "+path)
-
-            source = path;
-          }
-
-          this.DL.IsUploading = true;
-          this.DA.SaveImage(source, 'images/recipes/' + this.DL.Recipe.Name + '.png');
-        });
-      });
-    });
-  }
-
-  public Login() {
-    this.DA.Login();
+    this.DL.SelectImage(this.DL.Recipe.Name);
   }
 
   public LoadComponent(selector: string) {
@@ -88,7 +53,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   private loadList() {
-    this.LoadComponent("recipe-list");
+    this.DL.LoadComponent("recipe-list");
   }
   
   ngOnInit() { 
@@ -98,5 +63,10 @@ export class RecipeDetailComponent implements OnInit {
       this.DL.Recipe.ImageURL = url;
       this.DL.IsUploading = false;
     });
+
+    this.DL.ImageSelected.subscribe(source => {
+      this.DL.IsUploading = true;
+      this.DA.UploadImage(source, 'images/recipes/' + this.DL.Recipe.Name + '.png');
+    })
   }
 }

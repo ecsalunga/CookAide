@@ -6,6 +6,7 @@ import { Core } from "./core";
 import { DataAccess, DataLayer } from "./data";
 import { RecipeListComponent } from "./recipe/list/recipe-list.component";
 import { RecipeDetailComponent } from "./recipe/detail/recipe-detail.component";
+import { TestComponent } from "./test/test.component";
 
 @NgModule({
     bootstrap: [
@@ -18,7 +19,8 @@ import { RecipeDetailComponent } from "./recipe/detail/recipe-detail.component";
     declarations: [
         AppComponent,
         RecipeListComponent,
-        RecipeDetailComponent
+        RecipeDetailComponent,
+        TestComponent
     ],
     providers: [
         Core,
@@ -27,7 +29,8 @@ import { RecipeDetailComponent } from "./recipe/detail/recipe-detail.component";
     ],
     entryComponents: [
         RecipeListComponent,
-        RecipeDetailComponent
+        RecipeDetailComponent,
+        TestComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -7,9 +7,8 @@
     android.systemIcon="ic_menu_save" android.position="actionBar"></ActionItem>
 </ActionBar>
 <StackLayout>
-    <button text="Facebook" (tap)="Login()"></button>
-    <Label *ngIf="DL.User != null" [text]="DL.User.uid"></Label> 
     <TextField hint="Name" [(ngModel)]="DL.Recipe.Name"></TextField>
+    <Progress *ngIf="DL.IsUploading" [value]="DL.DATA_UploadProgress" maxValue="100"></Progress>
     <Image (tap)="SelectImage()" [src]="imageURL"></Image>
     <TextField hint="Description" [(ngModel)]="DL.Recipe.Description"></TextField>
     <TextView (tap)="StartEdit($event)" [(ngModel)]="DL.Recipe.Ingredients" hint="Ingredients"></TextView>

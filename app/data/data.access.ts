@@ -34,12 +34,14 @@ export class DataAccess {
         this.RecipeDAL.Save(this.DL.Recipe);
     }
 
-    public SaveImage(source: string, path: string) {
+    public UploadImage(source: string, path: string) {
         firebase.uploadFile({
             remoteFullPath: path,
             localFullPath: source,
             onProgress: (status) => {
-                this.DL.DATA_UploadStatus = status.percentageCompleted;
+                this.DL.ngZone.run(() => {
+                    this.DL.DATA_UploadProgress = status.percentageCompleted;
+                });
             }
         })
         .then(uploadedFile => {
@@ -47,7 +49,7 @@ export class DataAccess {
                 this.ImageUploaded.emit(uploaded.url);
             },
             (error) => {
-                console.log("File upload error: " + error);
+                console.log("UploadImage: " + error);
             }
         );
     }

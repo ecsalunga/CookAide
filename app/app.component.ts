@@ -14,12 +14,12 @@ export class AppComponent implements OnInit {
 
     constructor(public core: Core, public DA: DataAccess, public DL: DataLayer) { }
 
-    public LoadComponent(selector: string) {
-        this.core.LoadComponent(selector);
+    public Online() {
+        this.DL.LoadComponent("recipe-list");
     }
 
-    public Online() {
-        this.LoadComponent("recipe-list");
+    public LoadTest() {
+        this.DL.LoadComponent("test");
     }
 
     ngOnInit() {
