@@ -1,6 +1,7 @@
 <ActionBar [title]="DL.TITLE"></ActionBar>
 <StackLayout>
   <Label text="Tester Page"></Label>
+  <Label class="fa" [text]="'fa-bluetooth' | fonticon"></Label> 
   <button text="Facebook" (tap)="Login()"></button>
   <Label *ngIf="DL.User != null" [text]="DL.User.uid"></Label> 
 </StackLayout>
