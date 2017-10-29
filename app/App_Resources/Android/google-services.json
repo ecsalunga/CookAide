@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "78476294192",
+    "firebase_url": "https://cook-aide.firebaseio.com",
+    "project_id": "cook-aide",
+    "storage_bucket": "cook-aide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78476294192:android:2b36131b57f96bcf",
+        "android_client_info": {
+          "package_name": "org.nativescript.CookAide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78476294192-udpdho3qijv3r3762lg479rld8pd3h00.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHbMdySWFCtMqKocbK9ZNg7-UOFgnN4Hs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

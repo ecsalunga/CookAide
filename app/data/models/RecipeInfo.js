@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var RecipeInfo = (function () {
+    function RecipeInfo(imageURL) {
+        this.ImageURL = imageURL;
+    }
+    return RecipeInfo;
+}());
+exports.RecipeInfo = RecipeInfo;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVjaXBlSW5mby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlJlY2lwZUluZm8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQTtJQVFJLG9CQUFZLFFBQWdCO1FBQ3hCLElBQUksQ0FBQyxRQUFRLEdBQUcsUUFBUSxDQUFDO0lBQzdCLENBQUM7SUFDTCxpQkFBQztBQUFELENBQUMsQUFYRCxJQVdDO0FBWFksZ0NBQVUiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY2xhc3MgUmVjaXBlSW5mbyB7XG4gICAgaWQ6IHN0cmluZztcbiAgICBOYW1lOiBzdHJpbmc7XG4gICAgRGVzY3JpcHRpb246IHN0cmluZztcbiAgICBJbmdyZWRpZW50czogc3RyaW5nO1xuICAgIEluc3RydWN0aW9uczogc3RyaW5nO1xuICAgIEltYWdlVVJMOiBzdHJpbmc7XG5cbiAgICBjb25zdHJ1Y3RvcihpbWFnZVVSTDogc3RyaW5nKSB7XG4gICAgICAgIHRoaXMuSW1hZ2VVUkwgPSBpbWFnZVVSTDtcbiAgICB9XG59Il19

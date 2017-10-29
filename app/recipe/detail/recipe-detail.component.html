@@ -1,0 +1,17 @@
+<ActionBar [title]="DL.TITLE">
+    <ActionItem (tap)="Cancel()" ios.systemIcon="1" ios.position="left"
+    android.systemIcon="ic_menu_close_clear_cancel"></ActionItem>
+    <ActionItem *ngIf="isEditing" (tap)="StopEdit()" ios.systemIcon="0" ios.position="right"
+    text="Done" android.position="actionBar"></ActionItem>
+    <ActionItem *ngIf="!isEditing" (tap)="Save()" ios.systemIcon="3" ios.position="right"
+    android.systemIcon="ic_menu_save" android.position="actionBar"></ActionItem>
+</ActionBar>
+<StackLayout>
+    <button text="Facebook" (tap)="Login()"></button>
+    <Label [text]="DL.UserID"></Label> 
+    <TextField hint="Name" [(ngModel)]="DL.Recipe.Name"></TextField>
+    <Image (tap)="SelectImage()" [src]="imageURL"></Image>
+    <TextField hint="Description" [(ngModel)]="DL.Recipe.Description"></TextField>
+    <TextView (tap)="StartEdit($event)" [(ngModel)]="DL.Recipe.Ingredients" hint="Ingredients"></TextView>
+    <TextView class="instructions" (tap)="StartEdit($event)" [(ngModel)]="DL.Recipe.Instructions" hint="Instructions"></TextView>
+</StackLayout>

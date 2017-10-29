@@ -1,0 +1,11 @@
+<ActionBar [title]="DL.TITLE">
+    <ActionItem (tap)="Add()" ios.systemIcon="4" ios.position="right"
+    android.systemIcon="ic_menu_add" android.position="actionBar"></ActionItem>
+</ActionBar>
+<ListView height="100%" [items]="DL.Recipes" (itemTap)="onItemTap($event)" class="list-group">
+    <ng-template let-recipe="item" let-i="index">
+        <StackLayout class="list-group-item">
+            <Label [text]="recipe.Name"></Label>
+        </StackLayout>
+    </ng-template>
+</ListView>
