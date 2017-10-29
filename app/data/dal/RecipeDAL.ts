@@ -11,7 +11,6 @@ export class RecipeDAL {
         firebase.query(fb => {
             let item:RecipeInfo = fb.value;
             item.id = fb.key;
-            console.log("Item: " + item.id);
             this.DL.ngZone.run(() => {
                 let exists = this.DL.Recipes.find(i => i.id == item.id);
                 if(exists == null)

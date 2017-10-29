@@ -8,7 +8,7 @@
 </ActionBar>
 <StackLayout>
     <button text="Facebook" (tap)="Login()"></button>
-    <Label [text]="DL.UserID"></Label> 
+    <Label *ngIf="DL.User != null" [text]="DL.User.uid"></Label> 
     <TextField hint="Name" [(ngModel)]="DL.Recipe.Name"></TextField>
     <Image (tap)="SelectImage()" [src]="imageURL"></Image>
     <TextField hint="Description" [(ngModel)]="DL.Recipe.Description"></TextField>

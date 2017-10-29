@@ -4,8 +4,6 @@ import { isIOS } from "platform";
 import { Core } from "../../core";
 import { DataLayer, DataAccess, RecipeInfo } from "../../data";
 import * as imagepicker from "nativescript-imagepicker";
-import firebase = require("nativescript-plugin-firebase");
-import fs = require('file-system')
 
 @Component({
   moduleId: module.id,
@@ -55,8 +53,7 @@ export class RecipeDetailComponent implements OnInit {
         image.getImage().then(imagesource => {
           if (isIOS) {
             source =  selected.substr(7, selected.length)
-            let folder = fs.knownFolders.documents();
-            let path = fs.path.join(folder.path, this.DL.Recipe.Name + '.png');
+            let path = this.DL.GetPath(this.DL.Recipe.Name + '.png');
             let saved = imagesource.saveToFile(path, "jpeg");
             if(saved)
               console.log("saved image "+path)
@@ -65,37 +62,16 @@ export class RecipeDetailComponent implements OnInit {
 
             source = path;
           }
-          firebase.uploadFile({
-              remoteFullPath: 'images/recipes/' + this.DL.Recipe.Name + '.png',
-              localFullPath: source,
-              onProgress: (status) => {
-                  this.DL.DATA_UploadStatus = status.percentageCompleted;
-              }
-            }).then(
-              (uploadedFile) => {
-                let uploaded = JSON.parse(JSON.stringify(uploadedFile));
-                this.imageURL = uploaded.url;
-                this.DL.Recipe.ImageURL = uploaded.url;
-              },
-              (error) => {
-                console.log("File upload error: " + error);
-              }
-            );
+
+          this.DL.IsUploading = true;
+          this.DA.SaveImage(source, 'images/recipes/' + this.DL.Recipe.Name + '.png');
         });
       });
     });
   }
 
   public Login() {
-    firebase.login({
-      type: firebase.LoginType.FACEBOOK
-    }).then((result) => {
-        console.log(JSON.stringify(result));
-      },
-      (errorMessage) => {
-        console.log("error: " + errorMessage);
-      }
-    );
+    this.DA.Login();
   }
 
   public LoadComponent(selector: string) {
@@ -117,5 +93,10 @@ export class RecipeDetailComponent implements OnInit {
   
   ngOnInit() { 
     this.DL.TITLE = "Recipe Details";
+    this.DA.ImageUploaded.subscribe(url => {
+      this.imageURL = url;
+      this.DL.Recipe.ImageURL = url;
+      this.DL.IsUploading = false;
+    });
   }
 }
