@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
-import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 import { Core } from "./core";
 import { DataLayer, DataAccess } from "./data";
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
     @ViewChild('viewChild', {read: ViewContainerRef})
     viewChild: ViewContainerRef;
 
-    constructor(public core: Core, public DA: DataAccess, public DL: DataLayer, private fonticon: TNSFontIconService) { }
+    constructor(public core: Core, public DA: DataAccess, public DL: DataLayer) { }
 
     public Online() {
         this.DL.LoadComponent("recipe-list");

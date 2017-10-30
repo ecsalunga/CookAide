@@ -1,9 +1,5 @@
 @import 'nativescript-theme-core/css/core.light.css';
 
-.fa {
-    font-family: FontAwesome;
-}
-
 TextField {
     border-bottom-width: 1px;
     border-color: silver;
