@@ -5,11 +5,11 @@ import { DataLayer, DataAccess, RecipeInfo } from "../../data";
 
 @Component({
   moduleId: module.id,
-  selector: 'recipe-detail',
-  templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.scss']
+  selector: 'recipe-local-detail',
+  templateUrl: './recipe-local-detail.component.html',
+  styleUrls: ['./recipe-local-detail.component.scss']
 })
-export class RecipeDetailComponent implements OnInit {
+export class RecipeLocalDetailComponent implements OnInit {
   imageURL: string;
   isEditing: boolean = false;
   editingTextView: TextView;
@@ -17,6 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) {
     if(this.DL.Recipe == null) {
       this.DL.Recipe = new RecipeInfo(DL.NO_IMAGE_URL);
+      this.DL.Recipe.id = this.DL.GetKey.toString();
     }
 
     if(!this.DL.Recipe.ImageURL)
@@ -44,7 +45,7 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   public Save() {
-    this.DA.RecipeSave();
+    this.DA.RecipeLocalSave();
     this.loadList();
   }
 
@@ -53,23 +54,16 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   private loadList() {
-    this.DL.LoadComponent("recipe-list");
+    this.DL.LoadComponent("recipe-local-list");
   }
   
   ngOnInit() { 
-    this.DL.TITLE = "Recipe Details";
-    this.DA.ImageUploaded.subscribe(url => {
-      if(this.DL.TITLE == "Recipe Details") {
+    this.DL.TITLE = "Local Recipe Details";
+
+    this.DL.ImageSelected.subscribe(url => {
+      if(this.DL.TITLE == "Local Recipe Details") {
         this.imageURL = url;
         this.DL.Recipe.ImageURL = url;
-        this.DL.IsUploading = false;
-      }
-    });
-
-    this.DL.ImageSelected.subscribe(source => {
-      if(this.DL.TITLE == "Recipe Details") {
-        this.DL.IsUploading = true;
-        this.DA.UploadImage(source, 'images/recipes/' + this.DL.Recipe.Name + '.png');
       }
     })
   }

@@ -6,6 +6,8 @@ import { Core } from "./core";
 import { DataAccess, DataLayer } from "./data";
 import { RecipeListComponent } from "./recipe/list/recipe-list.component";
 import { RecipeDetailComponent } from "./recipe/detail/recipe-detail.component";
+import { RecipeLocalListComponent } from "./recipe/local-list/recipe-local-list.component";
+import { RecipeLocalDetailComponent } from "./recipe/local-detail/recipe-local-detail.component";
 import { TestComponent } from "./test/test.component";
 
 @NgModule({
@@ -20,6 +22,8 @@ import { TestComponent } from "./test/test.component";
         AppComponent,
         RecipeListComponent,
         RecipeDetailComponent,
+        RecipeLocalListComponent,
+        RecipeLocalDetailComponent,
         TestComponent
     ],
     providers: [
@@ -30,6 +34,8 @@ import { TestComponent } from "./test/test.component";
     entryComponents: [
         RecipeListComponent,
         RecipeDetailComponent,
+        RecipeLocalListComponent,
+        RecipeLocalDetailComponent,
         TestComponent
     ],
     schemas: [

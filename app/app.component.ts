@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
         this.DL.LoadComponent("recipe-list");
     }
 
+    public Local() {
+        this.DL.LoadComponent("recipe-local-list");
+    }
+
     public LoadTest() {
         this.DL.LoadComponent("test");
     }

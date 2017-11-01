@@ -17,10 +17,12 @@ export class DataLayer {
     NO_IMAGE_URL: string = "res://images/noimage";
     DATA_UploadProgress: Number = 0;
     DATA_FS_PATH: string = fs.knownFolders.documents().path;
+    DATA_FS_DOCUMENT: fs.Folder = fs.knownFolders.documents();
     IsUploading: boolean = false;
 
     Recipe: RecipeInfo;
     Recipes: Array<RecipeInfo>;
+    RecipesLocal: Array<RecipeInfo>;
 
     constructor(private core: Core, public ngZone: NgZone) {}
 

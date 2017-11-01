@@ -34,7 +34,12 @@ export class DataAccess {
         this.RecipeDAL.Save(this.DL.Recipe);
     }
 
+    public RecipeLocalSave(){
+        this.RecipeDAL.SaveLocal(this.DL.Recipe);
+    }
+
     public UploadImage(source: string, path: string) {
+        this.DL.DATA_UploadProgress = 0;
         firebase.uploadFile({
             remoteFullPath: path,
             localFullPath: source,

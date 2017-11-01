@@ -7,6 +7,11 @@ export class RecipeDAL {
     constructor(private DL: DataLayer) { }
 
     public Load() {
+        this.LoadOnline();
+        this.LoadLocal();
+    }
+    
+    public LoadOnline() {
         this.DL.Recipes = new Array<RecipeInfo>();
         firebase.query(fb => {
             let item:RecipeInfo = fb.value;
@@ -31,10 +36,33 @@ export class RecipeDAL {
         });
     }
 
+    public LoadLocal() {
+        this.DL.RecipesLocal = new Array<RecipeInfo>();
+        let recipes = this.DL.DATA_FS_DOCUMENT.getFile("recipes.json");
+        
+        recipes.readText().then(content => {
+          if(content != null && content.length > 0)
+            this.DL.RecipesLocal = <Array<RecipeInfo>>JSON.parse(content);
+        });
+    }
+
     public Save(item: RecipeInfo) {
         if(!item.id)
             firebase.push(this.PATH, item);
         else
             firebase.update(this.PATH + "/" + item.id, item);
+    }
+
+    public SaveLocal(item: RecipeInfo) {
+        let exists = this.DL.RecipesLocal.find(i => i.id == item.id);
+        if(exists == null)
+            this.DL.RecipesLocal.push(item)
+        else {
+            this.DL.RecipesLocal = this.DL.RecipesLocal.filter(i => i.id != exists.id)
+            this.DL.RecipesLocal.push(item);
+        }
+
+        let recipes = this.DL.DATA_FS_DOCUMENT.getFile("recipes.json");
+        recipes.writeText(JSON.stringify(this.DL.RecipesLocal));
     }
 }

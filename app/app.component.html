@@ -5,7 +5,7 @@
     </ScrollView>
     
     <FlexboxLayout class="tab" justifyContent="space-around">
-        <Button text="PENDING Recipes"></Button>
+        <Button text="Local Recipes" (tap)="Local()"></Button>
         <Button text="Online Recipes" (tap)="Online()"></Button>
         <Button class="fa" [text]="'\uf293' + ' Test'" (tap)="LoadTest()"></Button>
     </FlexboxLayout>
