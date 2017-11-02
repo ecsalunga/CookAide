@@ -62,6 +62,7 @@ export class RecipeDAL {
             this.DL.RecipesLocal.push(item);
         }
 
+        this.DL.RecipesLocal.sort((item1, item2) => item1.Name.localeCompare(item2.Name));
         let recipes = this.DL.DATA_FS_DOCUMENT.getFile("recipes.json");
         recipes.writeText(JSON.stringify(this.DL.RecipesLocal));
     }

@@ -17,7 +17,7 @@ export class RecipeLocalDetailComponent implements OnInit {
   constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) {
     if(this.DL.Recipe == null) {
       this.DL.Recipe = new RecipeInfo(DL.NO_IMAGE_URL);
-      this.DL.Recipe.id = this.DL.GetKey.toString();
+      this.DL.Recipe.id = this.DL.GetKey().toString();
     }
 
     if(!this.DL.Recipe.ImageURL)
