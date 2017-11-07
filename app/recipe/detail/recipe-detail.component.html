@@ -13,4 +13,5 @@
     <TextField hint="Description" [(ngModel)]="DL.Recipe.Description"></TextField>
     <TextView (tap)="StartEdit($event)" [(ngModel)]="DL.Recipe.Ingredients" hint="Ingredients"></TextView>
     <TextView class="instructions" (tap)="StartEdit($event)" [(ngModel)]="DL.Recipe.Instructions" hint="Instructions"></TextView>
+    <button text="Download" (tap)="DownloadRecipe()"></button>
 </StackLayout>

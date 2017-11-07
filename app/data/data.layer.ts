@@ -10,6 +10,7 @@ import { RecipeInfo } from "./";
 @Injectable()
 export class DataLayer {
     ImageSelected: EventEmitter<string> = new EventEmitter();
+    ImageDownloaded: EventEmitter<string> = new EventEmitter();
 
     TITLE: string;
     User: firebase.User;
@@ -53,6 +54,16 @@ export class DataLayer {
         },
         (error) => {
             console.log("SelectImage: " + error);
+        });
+    }
+
+    public DownloadImage(path: string, url: string) {
+        is.fromUrl(url)
+        .then(imagesource => {
+            imagesource.saveToFile(path, "png");
+            this.ImageDownloaded.emit(path);
+        }, (error) => {
+            //console.log("Error loading image: " + error);
         });
     }
 

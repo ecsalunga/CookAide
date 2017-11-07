@@ -12,12 +12,14 @@ import { DataLayer, DataAccess, RecipeInfo } from "../../data";
 export class RecipeDetailComponent implements OnInit {
   imageURL: string;
   isEditing: boolean = false;
+  canDownload: boolean = false;
   editingTextView: TextView;
 
   constructor(public core: Core, private DA: DataAccess, private DL: DataLayer) {
-    if(this.DL.Recipe == null) {
+    if(this.DL.Recipe == null)
       this.DL.Recipe = new RecipeInfo(DL.NO_IMAGE_URL);
-    }
+    else
+      this.canDownload = true;
 
     if(!this.DL.Recipe.ImageURL)
       this.DL.Recipe.ImageURL = DL.NO_IMAGE_URL;
@@ -28,6 +30,11 @@ export class RecipeDetailComponent implements OnInit {
   public StartEdit(args) {
     this.editingTextView = <TextView>args.object;
     this.isEditing = true;
+  }
+
+  public DownloadRecipe() {
+    let path = this.DL.GetPath(this.DL.Recipe.Name + '.png');
+    this.DL.DownloadImage(path, this.DL.Recipe.ImageURL);
   }
 
   public StopEdit() {
@@ -71,6 +78,14 @@ export class RecipeDetailComponent implements OnInit {
         this.DL.IsUploading = true;
         this.DA.UploadImage(source, 'images/recipes/' + this.DL.Recipe.Name + '.png');
       }
-    })
+    });
+
+    this.DL.ImageDownloaded.subscribe(path => {
+      if(this.DL.TITLE == "Recipe Details") {
+        this.DL.Recipe.ImageURL = path;
+        this.DA.RecipeLocalSave();
+        this.DL.LoadComponent("recipe-local-list");
+      }
+    });
   }
 }
